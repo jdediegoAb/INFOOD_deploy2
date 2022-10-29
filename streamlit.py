@@ -1,9 +1,13 @@
+from _typeshed import SupportsRead
 import streamlit as st
 import pandas as pd
 import numpy as np
 import fuzzywuzzy
 from fuzzywuzzy import fuzz,process
 from datetime import datetime
+from gsheetsdb import connect
+
+
 st.set_page_config(layout="centered")
 Title=st.container()
 searcher=st.container()
@@ -29,7 +33,7 @@ second_title = '<p style="font-family:Arial Black; color:#008A89; font-size: 32p
 #user_input = st.text_input("product")
 
 
-@st.cache(allow_output_mutation=True) #mirar chache para ver si es necesario. pq el resultado es mehhhhh
+@st.cache(allow_output_mutation=True) 
 def get_data(filename):
     df_products=pd.read_csv(filename)
     return df_products
@@ -58,3 +62,21 @@ with columns[1]:
     else:
         st.write("no insert 🫤")
         st.stop()
+
+#
+
+
+# Create a connection object.
+#conn = connect()
+
+# Perform SQL query on the Google Sheet.
+# Uses st.cache to only rerun when the query changes or after 10 min.
+
+sheet_url = st.secrets["public_gsheets_url"]
+spreadsheetname='INFOOD_inputs'
+def update_info(spreadsheetname,dataframe):
+    col=['name','Time_stamp']
+    table1.df_to_sheet(table1[col],sheet=sheet_url,index=False)
+    st.sidebar.info('update to GoogleSheets')
+   
+
