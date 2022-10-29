@@ -81,13 +81,8 @@ with columns[1]:
     for row in rows:
         st.write(f"{row.name} has a :{row.pet}:")
 
-
-
-
     spreadsheetname='INFOOD_inputs'
-    def update_info(spreadsheetname,dataframe):
-        col=['name','Time_stamp']
-        table1.df_to_sheet(table1[col],sheet=sheet_url,index=False)
-        st.sidebar.info('update to GoogleSheets')
+    df_to_sheet(table1,sheet=sheet_url,index=False)
+  
    
 
