@@ -73,7 +73,6 @@ with columns[1]:
         return rows
 
     sheet_url = st.secrets["public_gsheets_url"]
-    #rows = run_query(f'INSERT INTO"{sheet_url}"(A,B) VALUES ("Hola","Adios")')
     
     rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
@@ -81,8 +80,23 @@ with columns[1]:
     for row in rows:
         st.write(f"{row.name} has a :{row.pet}:")
 
-    spreadsheetname='INFOOD_inputs'
-    table1.df_to_sheet(table1,sheet=sheet_url,index=False)
-  
-   
+    #def update_the_spreadsheet(spreadsheetname,dataframe):
+        #col = ['Compound CID','Time_stamp']
+        #spread.df_to_sheet(dataframe[col],sheet = spreadsheetname,index = False)
+       # st.sidebar.info('Updated to GoogleSheet')
+ # scope = ['https://spreadsheets.google.com/feeds',
+         'https://www.googleapis.com/auth/drive']
+
+#credentials = service_account.Credentials.from_service_account_info(
+                #st.secrets["gcp_service_account"], scopes = scope)
+#client = Client(scope=scope,creds=credentials)
+#spreadsheetname = "Database"
+#spread = Spread(spreadsheetname,client = client)
+#now = datetime.now()
+#opt = {'Compound CID': [cid_entry],
+         #'Time_stamp' :  [now]} 
+#opt_df = DataFrame(opt)
+#df = load_the_spreadsheet('Pending CID')
+#new_df = df.append(opt_df,ignore_index=True)
+#update_the_spreadsheet('Pending CID',new_df)   
 
