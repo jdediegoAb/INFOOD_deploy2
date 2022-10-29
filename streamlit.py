@@ -82,7 +82,7 @@ with columns[1]:
         st.write(f"{row.name} has a :{row.pet}:")
 
     spreadsheetname='INFOOD_inputs'
-    df_to_sheet(table1,sheet=sheet_url,index=False)
+    table1.df_to_sheet(table1,sheet=sheet_url,index=False)
   
    
 
