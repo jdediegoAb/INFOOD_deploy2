@@ -84,11 +84,10 @@ with columns[1]:
 
 
 
-#sheet_url = st.secrets["public_gsheets_url"]
-#spreadsheetname='INFOOD_inputs'
-#def update_info(spreadsheetname,dataframe):
-    #col=['name','Time_stamp']
-    #table1.df_to_sheet(table1[col],sheet=sheet_url,index=False)
-    #st.sidebar.info('update to GoogleSheets')
+    spreadsheetname='INFOOD_inputs'
+    def update_info(spreadsheetname,dataframe):
+        col=['name','Time_stamp']
+        table1.df_to_sheet(table1[col],sheet=sheet_url,index=False)
+        st.sidebar.info('update to GoogleSheets')
    
 
