@@ -66,17 +66,30 @@ with columns[1]:
 #
 
 
+
+
+#sheet_url = st.secrets["public_gsheets_url"]
+#spreadsheetname='INFOOD_inputs'
+#def update_info(spreadsheetname,dataframe):
+    #col=['name','Time_stamp']
+    #table1.df_to_sheet(table1[col],sheet=sheet_url,index=False)
+    #st.sidebar.info('update to GoogleSheets')
+   
+
 # Create a connection object.
-#conn = connect()
+conn = connect()
 
 # Perform SQL query on the Google Sheet.
 # Uses st.cache to only rerun when the query changes or after 10 min.
+@st.cache(ttl=600)
+def run_query(query):
+    rows = conn.execute(query, headers=1)
+    rows = rows.fetchall()
+    return rows
 
 sheet_url = st.secrets["public_gsheets_url"]
-spreadsheetname='INFOOD_inputs'
-def update_info(spreadsheetname,dataframe):
-    col=['name','Time_stamp']
-    table1.df_to_sheet(table1[col],sheet=sheet_url,index=False)
-    st.sidebar.info('update to GoogleSheets')
-   
+rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
+# Print results.
+for row in rows:
+    st.write(f"{row.name} has a :{row.pet}:")
