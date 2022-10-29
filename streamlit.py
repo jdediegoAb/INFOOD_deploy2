@@ -73,7 +73,7 @@ with columns[1]:
         return rows
 
     sheet_url = st.secrets["public_gsheets_url"]
-    rows = run_query(f'INSERT INTO"{sheet_url}"(name,pet) VALUES ('Hola','Adios')')
+    rows = run_query(f'INSERT INTO"{sheet_url}"(A,B) VALUES ("Hola","Adios")')
     
     rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
