@@ -62,6 +62,7 @@ with columns[1]:
         st.stop()
 
 # Create a connection object.
+sheet_url = st.secrets["public_gsheets_url"]
 scope=["https://www.googleapis.com/auth/spreadsheets"]
 credentials = service_account.Credentials.from_service_account_info(
     st.secrets["gcp_service_account"],
@@ -100,7 +101,7 @@ update_the_spreadsheet('Infood_input',new_df)
     #rows = conn.execute(query, headers=1)
     #rows = rows.fetchall()
     #return rows
-#sheet_url = st.secrets["public_gsheets_url"]
+
 #rows = run_query(f'SELECT * FROM "{sheet_url}"')
 # Print results.
 #for row in rows:
