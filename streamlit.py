@@ -1,3 +1,4 @@
+from _typeshed import SupportsRead
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -5,6 +6,9 @@ import fuzzywuzzy
 from fuzzywuzzy import fuzz,process
 from datetime import datetime
 from gsheetsdb import connect
+from google.oauth2 import service_account
+from gspread import Spread,Client
+from pandas import DataFrame
 
 
 st.set_page_config(layout="centered")
@@ -22,14 +26,10 @@ original_title = '<p style="font-family:Arial Black; color:#008A89; font-size: 3
 image_title='<p style="font-family:Verdana; color:#1C5D70; font-size: 15px;">The app to look for food info</p>'
 second_title = '<p style="font-family:Arial Black; color:#008A89; font-size: 32px;">List of products</p>'
 
-
-#008A89 letter color
+#letter color
+#008A89 
 #1C5D70
 #2F4858
-#st.image("./Infood/infood.png",)
-
-#input_feature= sel_col.text_input('product name: ')
-#user_input = st.text_input("product")
 
 
 @st.cache(allow_output_mutation=True) 
@@ -62,41 +62,44 @@ with columns[1]:
         st.write("no insert 🫤")
         st.stop()
 
-    # Create a connection object.
-    conn = connect()
+# Create a connection object.
+scope=["https://www.googleapis.com/auth/spreadsheets"]
+credentials = service_account.Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"],
+    scopes=scope)
+conn = connect(credentials=credentials)
 
-    # Perform SQL query on the Google Sheet.
-    # Uses st.cache to only rerun when the query changes or after 10 min.
-    def run_query(query):
-        rows = conn.execute(query, headers=1)
-        rows = rows.fetchall()
-        return rows
+def update_the_spreadsheet(spreadsheetname,dataframe):
+        col = ['input','Time_stamp']
+        spread.df_to_sheet(dataframe[col],sheet = spreadsheetname,index = False)
+def load_the_spreadsheet(spreadsheetname):
+    worksheet = sh.worksheet(spreadsheetname)
+    df = DataFrame(worksheet.get_all_records())
+    return df
 
-    sheet_url = st.secrets["public_gsheets_url"]
-    
-    rows = run_query(f'SELECT * FROM "{sheet_url}"')
+client = Client(scope=scope,creds=credentials)
+spreadsheetname = "Infood_input"
+spread = Spread(spreadsheetname,client = client)
+sh = client.open(spreadsheetname)
+worksheet_list = sh.worksheets()
+now = datetime.now()
+opt = {'input':[user_input],
+         'Time_stamp' :  [now]} 
+opt_df = DataFrame(opt)
+df = load_the_spreadsheet('input')
+new_df = df.append(opt_df,ignore_index=True)
+update_the_spreadsheet('input',new_df)   
 
-    # Print results.
-    for row in rows:
-        st.write(f"{row.name} has a :{row.pet}:")
 
-    #def update_the_spreadsheet(spreadsheetname,dataframe):
-        #col = ['Compound CID','Time_stamp']
-        #spread.df_to_sheet(dataframe[col],sheet = spreadsheetname,index = False)
-       # st.sidebar.info('Updated to GoogleSheet')
- # scope = ['https://spreadsheets.google.com/feeds',
-         #'https://www.googleapis.com/auth/drive']
-
-#credentials = service_account.Credentials.from_service_account_info(
-                #st.secrets["gcp_service_account"], scopes = scope)
-#client = Client(scope=scope,creds=credentials)
-#spreadsheetname = "Database"
-#spread = Spread(spreadsheetname,client = client)
-#now = datetime.now()
-#opt = {'Compound CID': [cid_entry],
-         #'Time_stamp' :  [now]} 
-#opt_df = DataFrame(opt)
-#df = load_the_spreadsheet('Pending CID')
-#new_df = df.append(opt_df,ignore_index=True)
-#update_the_spreadsheet('Pending CID',new_df)   
-
+# Perform SQL query on the Google Sheet.
+# Uses st.cache to only rerun when the query changes or after 10 min.
+#@st.cache(ttl=600)
+#def run_query(query):
+    #rows = conn.execute(query, headers=1)
+    #rows = rows.fetchall()
+    #return rows
+#sheet_url = st.secrets["public_gsheets_url"]
+#rows = run_query(f'SELECT * FROM "{sheet_url}"')
+# Print results.
+#for row in rows:
+    #st.write(f"{row.name} has a :{row.pet}:")
