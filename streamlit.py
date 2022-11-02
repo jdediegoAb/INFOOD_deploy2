@@ -66,7 +66,14 @@ scope=["https://www.googleapis.com/auth/spreadsheets"]
 credentials = service_account.Credentials.from_service_account_info(
     st.secrets["gcp_service_account"],
     scopes=scope)
-conn = connect(credentials=credentials)
+client = Client(scope=scope,creds=credentials)
+spreadsheetname = "Infood_input"
+spread = Spread(spreadsheetname,client = client)
+
+st.write(spread.url)
+
+sh = client.open(spreadsheetname)
+worksheet_list = sh.worksheets()
 
 def update_the_spreadsheet(spreadsheetname,dataframe):
         col = ['input','Time_stamp']
@@ -76,11 +83,7 @@ def load_the_spreadsheet(spreadsheetname):
     df = DataFrame(worksheet.get_all_records())
     return df
 
-client = Client(scope=scope,creds=credentials)
-spreadsheetname = "Infood_input"
-spread = Spread(spreadsheetname,client = client)
-sh = client.open(spreadsheetname)
-worksheet_list = sh.worksheets()
+
 now = datetime.now()
 opt = {'input':[user_input],
          'Time_stamp' :  [now]} 
