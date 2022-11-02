@@ -85,9 +85,9 @@ now = datetime.now()
 opt = {'input':[user_input],
          'Time_stamp' :  [now]} 
 opt_df = DataFrame(opt)
-df = load_the_spreadsheet('input')
+df = load_the_spreadsheet('Infood_input')
 new_df = df.append(opt_df,ignore_index=True)
-update_the_spreadsheet('input',new_df)   
+update_the_spreadsheet('Infood_input',new_df)   
 
 
 # Perform SQL query on the Google Sheet.
