@@ -6,7 +6,7 @@ from fuzzywuzzy import fuzz,process
 from datetime import datetime
 from gsheetsdb import connect
 from google.oauth2 import service_account
-from gspread import Spread,Client
+from gspread_pandas import Spread,Client
 from pandas import DataFrame
 
 
