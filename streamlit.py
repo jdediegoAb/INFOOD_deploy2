@@ -63,7 +63,7 @@ with columns[1]:
 
 # Create a connection object.
 #sheet_url = st.secrets["public_gsheets_url"]
-scope=["https://spreadsheets.google.com/feeds"]#,'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
+scope=["https://www.googleapis.com/auth/drive.file"]#,'https://www.googleapis.com/auth/spreadsheets',,"https://www.googleapis.com/auth/drive"]
 
 credentials = service_account.Credentials.from_service_account_info(
     st.secrets["gcp_service_account"],
