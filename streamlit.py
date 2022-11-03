@@ -63,14 +63,12 @@ with columns[1]:
 
 # Create a connection object.
 #sheet_url = st.secrets["public_gsheets_url"]
-scope=['https://www.googleapis.com/auth/spreadsheets']
+scope=["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
 
 credentials = service_account.Credentials.from_service_account_info(
     st.secrets["gcp_service_account"],
-    scopes=[
-        "https://www.googleapis.com/auth/spreadsheets",
-    ],
-)
+    scopes=scope)
+
 client = Client(scope=scope,creds=credentials)
 spreadsheetname = "Infood_input"
 spread = Spread(spreadsheetname,client = client)
