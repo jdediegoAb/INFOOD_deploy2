@@ -70,7 +70,7 @@ credentials = service_account.Credentials.from_service_account_info(
     scopes=scope)
 
 client = Client(scope=scope,creds=credentials)
-spreadsheetname = "infood"
+spreadsheetname = "Infood_input"
 spread = Spread(spreadsheetname,client = client)
 
 st.write(spread.url)
