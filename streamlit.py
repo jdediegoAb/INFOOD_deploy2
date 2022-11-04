@@ -68,7 +68,8 @@ scope=['https://www.googleapis.com/auth/spreadsheets']
 credentials = service_account.Credentials.from_service_account_info(
     st.secrets["gcp_service_account"],
     scopes=scope)
-st.write(credentials)
+with columns[1]:
+    st.write(credentials)
 client = Client(scope=scope,creds=credentials)
 spreadsheetname = "infood"
 spread = Spread(spreadsheetname,client = client)
