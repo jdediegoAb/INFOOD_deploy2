@@ -68,7 +68,7 @@ scope=['https://www.googleapis.com/auth/spreadsheets']
 credentials = service_account.Credentials.from_service_account_info(
     st.secrets["gcp_service_account"],
     scopes=scope)
-
+st.write(credentials)
 client = Client(scope=scope,creds=credentials)
 spreadsheetname = "infood"
 spread = Spread(spreadsheetname,client = client)
@@ -78,11 +78,11 @@ st.write(spread.url)
 sh = client.open(spreadsheetname)
 worksheet_list = sh.worksheets()
 
-def worksheet_names():
-    sheet_names = []   
-    for sheet in worksheet_list:
-        sheet_names.append(sheet.title)  
-    return sheet_names
+#def worksheet_names():
+    #sheet_names = []   
+    #for sheet in worksheet_list:
+        #sheet_names.append(sheet.title)  
+    #return sheet_names
 #def load_the_spreadsheet(spreadsheetname):
     #worksheet = sh.worksheet(spreadsheetname)
     #df = DataFrame(worksheet.get_all_records())
