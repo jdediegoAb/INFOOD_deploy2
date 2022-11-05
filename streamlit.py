@@ -81,15 +81,12 @@ rows = run_query(f'SELECT * FROM "{sheet_url}"')
 for row in rows:
     st.write(f"{row.name} has a :{row.pet}:")        
         
-  
-#with columns[1]:
-    #st.write(credentials)
-#client = Client(scope=scope,creds=credentials)
-#spreadsheetname = "infood2"
-#spread = Spread(spreadsheetname,client = client)
+client = Client(scope=scope,creds=credentials)
+spreadsheetname = "infood2"
+spread = Spread(spreadsheetname,client = client)
 
-#with columns[1]:
-    #st.write(spread.url)
+with columns[1]:
+    st.write(spread.url)
 
 #sh = client.open(spreadsheetname)
 #worksheet_list = sh.worksheets()
