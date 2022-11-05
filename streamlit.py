@@ -113,8 +113,9 @@ with columns[1]:
     rows = run_query(query)
     # Print results.
     df = pd.DataFrame(rows)
-    df2= df['INPUT'].value_counts().head(5)
-    st.dataframe(df)
+    df2 = df[['INPUT']]
+    df3= df['INPUT'].value_counts().head(5)
+    st.dataframe(df2)
 with columns[1]:
     st.markdown(text, unsafe_allow_html=True)
     st.write(spread.url)
