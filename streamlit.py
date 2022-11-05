@@ -116,7 +116,10 @@ with columns[1]:
     df2 = df[['INPUT']]
     df3=df2.groupby("INPUT").count()
     df4= df3['INPUT'].value_counts().head(5)
+    st.dataframe(df2)
+    st.dataframe(df3)
     st.dataframe(df4)
+   
 with columns[1]:
     st.markdown(text, unsafe_allow_html=True)
     st.write(spread.url)
