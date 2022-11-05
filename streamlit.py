@@ -114,4 +114,4 @@ with columns[1]:
     # Print results.
     for row in rows:
         for row in rows:
-        st.write(f"{row.name} has a :{row.pet}:")
+            st.write(f"{row.name} has a :{row.pet}:")
