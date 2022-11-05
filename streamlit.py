@@ -110,7 +110,8 @@ with columns[1]:
         rows = conn.execute(query, headers=1)
         rows = rows.fetchall()
         return rows
-    query= f'SELECT input COUNT(input) AS input_count FROM "{sheet_url}" GROUP BY "input" ORDER by "input_count" LIMIT 3'
+    query= f'SELECT *  FROM "{sheet_url}"'
     rows = run_query(query)
     # Print results.
-    st.table(rows)
+    df = pd.DataFrame(rows)
+    st.dataframe(rows)
