@@ -64,7 +64,8 @@ with columns[1]:
         
         
         
-scope= ["https://www.googleapis.com/auth/spreadsheets"]   
+scope= ['https://spreadsheets.google.com/feeds',
+         'https://www.googleapis.com/auth/drive']   
 credentials = service_account.Credentials.from_service_account_info(
     st.secrets["gcp_service_account"],
     scopes=scope
