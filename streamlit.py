@@ -61,24 +61,47 @@ with columns[1]:
         st.write("no insert 🫤")
         st.stop()
 
-# Create a connection object.
-#sheet_url = st.secrets["public_gsheets_url"]
-scope=["https://www.googleapis.com/auth/spreadsheets"]
-
+        
 credentials = service_account.Credentials.from_service_account_info(
     st.secrets["gcp_service_account"],
-    scopes=scope)
-with columns[1]:
-    st.write(credentials)
-client = Client(scope=scope,creds=credentials)
-spreadsheetname = "infood2"
-spread = Spread(spreadsheetname,client = client)
+    scopes=[
+        "https://www.googleapis.com/auth/spreadsheets",
+    ],
+)
+conn = connect(credentials=credentials)        
+        
+@st.cache(ttl=600)
+def run_query(query):
+    rows = conn.execute(query, headers=1)
+    rows = rows.fetchall()
+    return rows
 
-with columns[1]:
-    st.write(spread.url)
+sheet_url = st.secrets["public_gsheets_url"]
+rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
-sh = client.open(spreadsheetname)
-worksheet_list = sh.worksheets()
+# Print results.
+for row in rows:
+    st.write(f"{row.name} has a :{row.pet}:")        
+        
+        
+# Create a connection object.
+#sheet_url = st.secrets["public_gsheets_url"]
+#scope=["https://www.googleapis.com/auth/spreadsheets"]
+
+#credentials = service_account.Credentials.from_service_account_info(
+    #st.secrets["gcp_service_account"],
+    #scopes=scope)
+#with columns[1]:
+    #st.write(credentials)
+#client = Client(scope=scope,creds=credentials)
+#spreadsheetname = "infood2"
+#spread = Spread(spreadsheetname,client = client)
+
+#with columns[1]:
+    #st.write(spread.url)
+
+#sh = client.open(spreadsheetname)
+#worksheet_list = sh.worksheets()
 
 #def worksheet_names():
     #sheet_names = []   
