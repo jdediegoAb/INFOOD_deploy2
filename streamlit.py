@@ -115,7 +115,7 @@ with columns[1]:
     df = pd.DataFrame(rows)
     df2 = df[['INPUT']]
     df3=df2.groupby(["INPUT"]).count()
-    df3= df['INPUT'].value_counts().head(5)
+    df4= df['INPUT'].value_counts().head(5)
     st.dataframe(df3)
 with columns[1]:
     st.markdown(text, unsafe_allow_html=True)
