@@ -61,13 +61,16 @@ with columns[1]:
         st.write("no insert 🫤")
         st.stop()
 
+        
+        
+        
 scope= ["https://www.googleapis.com/auth/spreadsheets"]   
 credentials = service_account.Credentials.from_service_account_info(
     st.secrets["gcp_service_account"],
     scopes=scope
 )
      
-        
+sheet_url = st.secrets["public_gsheets_url"]       
 client = Client(scope=scope,creds=credentials)
 spreadsheetname = sheet_url
 spread = Spread(spreadsheetname,client = client)
@@ -109,7 +112,7 @@ def run_query(query):
     rows = rows.fetchall()
     return rows
 
-sheet_url = st.secrets["public_gsheets_url"]
+
 rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
 # Print results.
