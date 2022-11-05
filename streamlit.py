@@ -82,27 +82,27 @@ with columns[1]:
 sh = client.open(spreadsheetname)
 worksheet_list = sh.worksheets()
 
-#def worksheet_names():
-    #sheet_names = []   
-    #for sheet in worksheet_list:
-        #sheet_names.append(sheet.title)  
-    #return sheet_names
-#def load_the_spreadsheet(spreadsheetname):
-    #worksheet = sh.worksheet(spreadsheetname)
-    #df = DataFrame(worksheet.get_all_records())
-    #return df
+def worksheet_names():
+    sheet_names = []   
+    for sheet in worksheet_list:
+        sheet_names.append(sheet.title)  
+    return sheet_names
+def load_the_spreadsheet(spreadsheetname):
+    worksheet = sh.worksheet(spreadsheetname)
+    df = DataFrame(worksheet.get_all_records())
+    return df
 
-#def update_the_spreadsheet(spreadsheetname,dataframe):
-        #col = ['input','Time_stamp']
-        #spread.df_to_sheet(dataframe[col],sheet = spreadsheetname,index = False)
+def update_the_spreadsheet(spreadsheetname,dataframe):
+        col = ['input','Time_stamp']
+        spread.df_to_sheet(dataframe[col],sheet = spreadsheetname,index = False)
 
-#now = datetime.now()
-#opt = {'input':[user_input],
-         #'Time_stamp' :  [now]} 
-#opt_df = DataFrame(opt)
-#df = load_the_spreadsheet('sheet1')
-#new_df = df.append(opt_df,ignore_index=True)
-#update_the_spreadsheet('sheet1',new_df)   
+now = datetime.now()
+opt = {'input':[user_input],
+         'Time_stamp' :  [now]} 
+opt_df = DataFrame(opt)
+df = load_the_spreadsheet('sheet1')
+new_df = df.append(opt_df,ignore_index=True)
+update_the_spreadsheet('sheet1',new_df)   
 
 
 conn = connect(credentials=credentials)        
