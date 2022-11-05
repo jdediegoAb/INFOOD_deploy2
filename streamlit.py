@@ -116,6 +116,6 @@ with columns[1]:
     df2= df['input'].value_counts().head(5)
     st.table(df2)
 with columns[1]:
-    url = "https://docs.google.com/spreadsheets/d/1iA8JVualosKgzTlV4oSpZM41rqmZff0qmBqfwxHP8WI/edit#gid=0"
+    url = sheet_url
     st.write("check out the whole list [link](url)")
   
