@@ -91,7 +91,6 @@ def load_the_spreadsheet(spreadsheetname):
     worksheet = sh.worksheet(spreadsheetname)
     df = DataFrame(worksheet.get_all_records())
     return df
-
 def update_the_spreadsheet(spreadsheetname,dataframe):
         col = ['input','Time_stamp']
         spread.df_to_sheet(dataframe[col],sheet = spreadsheetname,index = False)
@@ -105,17 +104,13 @@ new_df = df.append(opt_df,ignore_index=True)
 update_the_spreadsheet('sheet1',new_df)   
 
 
-conn = connect(credentials=credentials)        
-        
+conn = connect(credentials=credentials)               
 @st.cache(ttl=600)
 def run_query(query):
     rows = conn.execute(query, headers=1)
     rows = rows.fetchall()
     return rows
-
-
 rows = run_query(f'SELECT * FROM "{sheet_url}"')
-
 # Print results.
 for row in rows:
-    st.write(f"{row.input} has a :{row.Time_stamp}:")   
+    st.write({row.input}{row.Time_stamp})   
