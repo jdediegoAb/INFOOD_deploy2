@@ -113,12 +113,10 @@ with columns[1]:
     rows = run_query(query)
     # Print results.
     df = pd.DataFrame(rows)
-    df2 = df[['INPUT']].groupby(['INPUT']).count()
+    df2 = df[['INPUT']]
     st.dataframe(df2)
-    df3=df2.groupby(['INPUT']).count()
+    df3= df2['INPUT'].value_counts()
     st.dataframe(df3)
-    df4= df3['INPUT'].value_counts()
-    st.dataframe(df4)
    
 with columns[1]:
     st.markdown(text, unsafe_allow_html=True)
