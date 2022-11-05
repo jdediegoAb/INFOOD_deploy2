@@ -78,8 +78,8 @@ spread = Spread(spreadsheetname,client = client)
 with columns[1]:
     st.write(spread.url)
 
-sh = client.open('infood2')
-#worksheet_list = sh.worksheets()
+sh = client.open(spreadsheetname)
+worksheet_list = sh.worksheets()
 
 #def worksheet_names():
     #sheet_names = []   
