@@ -113,5 +113,4 @@ with columns[1]:
     rows = run_query(f'SELECT * FROM "{sheet_url}"')
     # Print results.
     for row in rows:
-        for row in rows:
-            st.write(f"{row.input} has a :{row.Time_stamp}:")
+        st.write(f"{row.input} has a :{row.Time_stamp}:")
