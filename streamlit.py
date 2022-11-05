@@ -110,7 +110,7 @@ with columns[1]:
         rows = conn.execute(query, headers=1)
         rows = rows.fetchall()
         return rows
-    rows = run_query(f'SELECT * FROM "{sheet_url}" COUNT(name) cnt ORDER BY cnt DESC')
-  LIMIT 3')
+    query="SELECT *, count(input) FROM "{sheet_url}" GROUP BY input ORDER BY count(input) DESC LIMIT 3 "
+    rows = run_query(query)
     # Print results.
     st.table(rows)
