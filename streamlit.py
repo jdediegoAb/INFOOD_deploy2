@@ -73,7 +73,7 @@ credentials = service_account.Credentials.from_service_account_info(
      
 sheet_url = st.secrets["public_gsheets_url"]       
 client = Client(scope=scope,creds=credentials)
-spreadsheetname = sheet_url
+spreadsheetname = 'infood2'
 spread = Spread(spreadsheetname,client = client)
 
 with columns[1]:
