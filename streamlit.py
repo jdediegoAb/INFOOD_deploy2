@@ -114,7 +114,7 @@ with columns[1]:
     # Print results.
     df = pd.DataFrame(rows)
     df2= df['INPUT'].value_counts().head(5)
-    st.table(df2)
+    st.dataframe(df2)
 with columns[1]:
     st.markdown(text, unsafe_allow_html=True)
     st.write(spread.url)
