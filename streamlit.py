@@ -103,14 +103,15 @@ df = load_the_spreadsheet('sheet1')
 new_df = df.append(opt_df,ignore_index=True)
 update_the_spreadsheet('sheet1',new_df)   
 
-
-conn = connect(credentials=credentials)               
-@st.cache(ttl=600)
-def run_query(query):
-    rows = conn.execute(query, headers=1)
-    rows = rows.fetchall()
-    return rows
-rows = run_query(f'SELECT * FROM "{sheet_url}"')
-# Print results.
-for row in rows:
-    st.write({row.input},{row.Time_stamp})   
+with columns[1]:
+    conn = connect(credentials=credentials)               
+    @st.cache(ttl=600)
+    def run_query(query):
+        rows = conn.execute(query, headers=1)
+        rows = rows.fetchall()
+        return rows
+    rows = run_query(f'SELECT * FROM "{sheet_url}"')
+    # Print results.
+    for row in rows:
+        for row in rows:
+        st.write(f"{row.name} has a :{row.pet}:")
