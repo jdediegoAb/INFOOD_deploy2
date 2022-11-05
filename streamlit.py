@@ -78,7 +78,7 @@ spread = Spread(spreadsheetname,client = client)
 with columns[1]:
     st.write(spread.url)
 
-#sh = client.open(spreadsheetname)
+sh = client.open(spreadsheetname)
 #worksheet_list = sh.worksheets()
 
 #def worksheet_names():
@@ -91,17 +91,17 @@ with columns[1]:
     #df = DataFrame(worksheet.get_all_records())
     #return df
 
-def update_the_spreadsheet(spreadsheetname,dataframe):
-        col = ['input','Time_stamp']
-        spread.df_to_sheet(dataframe[col],sheet = spreadsheetname,index = False)
+#def update_the_spreadsheet(spreadsheetname,dataframe):
+        #col = ['input','Time_stamp']
+        #spread.df_to_sheet(dataframe[col],sheet = spreadsheetname,index = False)
 
-now = datetime.now()
-opt = {'input':[user_input],
-         'Time_stamp' :  [now]} 
-opt_df = DataFrame(opt)
-df = load_the_spreadsheet('sheet1')
-new_df = df.append(opt_df,ignore_index=True)
-update_the_spreadsheet('sheet1',new_df)   
+#now = datetime.now()
+#opt = {'input':[user_input],
+         #'Time_stamp' :  [now]} 
+#opt_df = DataFrame(opt)
+#df = load_the_spreadsheet('sheet1')
+#new_df = df.append(opt_df,ignore_index=True)
+#update_the_spreadsheet('sheet1',new_df)   
 
 
 conn = connect(credentials=credentials)        
