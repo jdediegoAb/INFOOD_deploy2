@@ -61,12 +61,10 @@ with columns[1]:
         st.write("no insert 🫤")
         st.stop()
 
-        
+scope= ["https://www.googleapis.com/auth/spreadsheets"]   
 credentials = service_account.Credentials.from_service_account_info(
     st.secrets["gcp_service_account"],
-    scopes=[
-        "https://www.googleapis.com/auth/spreadsheets",
-    ],
+    scopes=scope
 )
 conn = connect(credentials=credentials)        
         
@@ -83,14 +81,7 @@ rows = run_query(f'SELECT * FROM "{sheet_url}"')
 for row in rows:
     st.write(f"{row.name} has a :{row.pet}:")        
         
-        
-# Create a connection object.
-#sheet_url = st.secrets["public_gsheets_url"]
-#scope=["https://www.googleapis.com/auth/spreadsheets"]
-
-#credentials = service_account.Credentials.from_service_account_info(
-    #st.secrets["gcp_service_account"],
-    #scopes=scope)
+  
 #with columns[1]:
     #st.write(credentials)
 #client = Client(scope=scope,creds=credentials)
