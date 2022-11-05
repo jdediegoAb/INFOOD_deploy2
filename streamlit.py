@@ -116,6 +116,7 @@ with columns[1]:
     df2= df['input'].value_counts().head(5)
     st.table(df2)
 with columns[1]:
+    st.write("check out the whole list [link]:")
     st.write(spread.url)
-    st.write("check out the whole list [link](url)")
+   
   
