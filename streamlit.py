@@ -24,7 +24,7 @@ st.markdown( """<style>.row_heading.level0 {display:none}.blank {display:none}</
 original_title = '<p style="font-family:Arial Black; color:#008A89; font-size: 32px;">Insert the product you are looking for</p>'
 image_title='<p style="font-family:Verdana; color:#1C5D70; font-size: 15px;">The app to look for food info</p>'
 second_title = '<p style="font-family:Arial Black; color:#008A89; font-size: 32px;">List of products</p>'
-
+text='<p style="font-family:Arial Black; color:#2F4858; font-size: 8px;">check out the whole list:</p>"
 #letter color
 #008A89 
 #1C5D70
@@ -116,7 +116,7 @@ with columns[1]:
     df2= df['input'].value_counts().head(5)
     st.table(df2)
 with columns[1]:
-    st.write("check out the whole list [link]:")
+    st.markdown(text, unsafe_allow_html=True)
     st.write(spread.url)
    
   
