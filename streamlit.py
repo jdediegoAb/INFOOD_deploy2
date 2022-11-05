@@ -91,11 +91,11 @@ def load_the_spreadsheet(spreadsheetname):
     df = DataFrame(worksheet.get_all_records())
     return df
 def update_the_spreadsheet(spreadsheetname,dataframe):
-        col = ['input','Time_stamp']
+        col = ['INPUT','Time_stamp']
         spread.df_to_sheet(dataframe[col],sheet = spreadsheetname,index = False)
 
 now = datetime.now()
-opt = {'input':[user_input],
+opt = {'INPUT':[user_input],
          'Time_stamp' :  [now]} 
 opt_df = DataFrame(opt)
 df = load_the_spreadsheet('sheet1')
@@ -113,7 +113,7 @@ with columns[1]:
     rows = run_query(query)
     # Print results.
     df = pd.DataFrame(rows)
-    df2= df['input'].value_counts().head(5)
+    df2= df['INPUT'].value_counts().head(5)
     st.table(df2)
 with columns[1]:
     st.markdown(text, unsafe_allow_html=True)
