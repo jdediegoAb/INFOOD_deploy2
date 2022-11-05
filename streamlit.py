@@ -116,7 +116,8 @@ with columns[1]:
     df2 = df[['INPUT']]
     st.dataframe(df2)
     df3= df2['INPUT'].value_counts()
-    st.dataframe(df3)
+    df4=df3.rename(columns = {'':'INPUT', 'INPUT':'Count'}, inplace = True)
+    st.dataframe(df4)
    
 with columns[1]:
     st.markdown(text, unsafe_allow_html=True)
