@@ -112,4 +112,4 @@ with columns[1]:
         return rows
     rows = run_query(f'SELECT * FROM "{sheet_url}" ORDER BY count DESC LIMIT 5')
     # Print results.
-        st.table(rows)
+    st.table(rows)
