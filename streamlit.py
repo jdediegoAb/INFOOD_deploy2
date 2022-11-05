@@ -110,7 +110,6 @@ with columns[1]:
         rows = conn.execute(query, headers=1)
         rows = rows.fetchall()
         return rows
-    rows = run_query(f'SELECT * FROM "{sheet_url}"')
+    rows = run_query(f'SELECT * FROM "{sheet_url}" ORDER BY count DESC LIMIT 5')
     # Print results.
-    for row in rows:
-        st.write(f"{row.input} has a :{row.Time_stamp}:")
+        st.table(rows)
