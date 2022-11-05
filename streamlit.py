@@ -82,7 +82,7 @@ for row in rows:
     st.write(f"{row.name} has a :{row.pet}:")        
         
 client = Client(scope=scope,creds=credentials)
-spreadsheetname = "infood2"
+spreadsheetname = sheet_url
 spread = Spread(spreadsheetname,client = client)
 
 with columns[1]:
