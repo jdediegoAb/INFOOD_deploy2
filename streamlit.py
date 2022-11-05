@@ -76,8 +76,7 @@ client = Client(scope=scope,creds=credentials)
 spreadsheetname = 'infood2'
 spread = Spread(spreadsheetname,client = client)
 
-with columns[1]:
-    st.write(spread.url)
+
 
 sh = client.open(spreadsheetname)
 worksheet_list = sh.worksheets()
@@ -115,4 +114,6 @@ with columns[1]:
     # Print results.
     df = pd.DataFrame(rows)
     df2= df['input'].value_counts().head(5)
-    st.dataframe(df2)
+    st.table(df2)
+with columns[1]:
+    st.write("check out the whole list [link]({"spread.url}")")
