@@ -115,7 +115,7 @@ with columns[1]:
     df = pd.DataFrame(rows)
     df2 = df[['INPUT']]
     df3= df2['INPUT'].value_counts()
-    df4=pd.Dataframe(df3)
+    df4=pd.DataFrame(df3)
     df4.columns=['INPUT','COUNT']
     st.dataframe(df4)
    
