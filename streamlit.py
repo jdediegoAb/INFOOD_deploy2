@@ -110,6 +110,7 @@ with columns[1]:
         rows = conn.execute(query, headers=1)
         rows = rows.fetchall()
         return rows
-    rows = run_query(f'SELECT * FROM "{sheet_url}" ORDER BY count DESC LIMIT 5')
+    rows = run_query(f'SELECT * FROM "{sheet_url}" COUNT(name) cnt ORDER BY cnt DESC
+  LIMIT 3')
     # Print results.
     st.table(rows)
