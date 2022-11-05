@@ -114,4 +114,5 @@ with columns[1]:
     rows = run_query(query)
     # Print results.
     df = pd.DataFrame(rows)
-    st.dataframe(rows)
+    df2= df['input'].value_counts().head(5)
+    st.dataframe(df2)
