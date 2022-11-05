@@ -114,10 +114,10 @@ with columns[1]:
     # Print results.
     df = pd.DataFrame(rows)
     df2 = df[['INPUT']]
-    df3=df2.groupby("INPUT").count()
-    df4= df3['INPUT'].value_counts().head(5)
     st.dataframe(df2)
+    df3=df2.groupby("INPUT").count()
     st.dataframe(df3)
+    df4= df3['INPUT'].value_counts()
     st.dataframe(df4)
    
 with columns[1]:
