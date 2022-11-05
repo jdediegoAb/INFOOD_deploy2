@@ -71,10 +71,11 @@ credentials = service_account.Credentials.from_service_account_info(
 with columns[1]:
     st.write(credentials)
 client = Client(scope=scope,creds=credentials)
-spreadsheetname = "infood"
+spreadsheetname = "infood2"
 spread = Spread(spreadsheetname,client = client)
 
-st.write(spread.url)
+with columns[1]:
+    st.write(spread.url)
 
 sh = client.open(spreadsheetname)
 worksheet_list = sh.worksheets()
