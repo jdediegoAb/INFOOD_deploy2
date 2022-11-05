@@ -81,15 +81,15 @@ with columns[1]:
 #sh = client.open(spreadsheetname)
 #worksheet_list = sh.worksheets()
 
-def worksheet_names():
-    sheet_names = []   
-    for sheet in worksheet_list:
-        sheet_names.append(sheet.title)  
-    return sheet_names
-def load_the_spreadsheet(spreadsheetname):
-    worksheet = sh.worksheet(spreadsheetname)
-    df = DataFrame(worksheet.get_all_records())
-    return df
+#def worksheet_names():
+    #sheet_names = []   
+    #for sheet in worksheet_list:
+        #sheet_names.append(sheet.title)  
+    #return sheet_names
+#def load_the_spreadsheet(spreadsheetname):
+    #worksheet = sh.worksheet(spreadsheetname)
+    #df = DataFrame(worksheet.get_all_records())
+    #return df
 
 def update_the_spreadsheet(spreadsheetname,dataframe):
         col = ['input','Time_stamp']
