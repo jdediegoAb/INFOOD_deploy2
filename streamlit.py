@@ -66,6 +66,41 @@ credentials = service_account.Credentials.from_service_account_info(
     st.secrets["gcp_service_account"],
     scopes=scope
 )
+     
+        
+client = Client(scope=scope,creds=credentials)
+spreadsheetname = sheet_url
+spread = Spread(spreadsheetname,client = client)
+
+with columns[1]:
+    st.write(spread.url)
+
+sh = client.open(spreadsheetname)
+worksheet_list = sh.worksheets()
+
+def worksheet_names():
+    sheet_names = []   
+    for sheet in worksheet_list:
+        sheet_names.append(sheet.title)  
+    return sheet_names
+def load_the_spreadsheet(spreadsheetname):
+    worksheet = sh.worksheet(spreadsheetname)
+    df = DataFrame(worksheet.get_all_records())
+    return df
+
+def update_the_spreadsheet(spreadsheetname,dataframe):
+        col = ['input','Time_stamp']
+        spread.df_to_sheet(dataframe[col],sheet = spreadsheetname,index = False)
+
+now = datetime.now()
+opt = {'input':[user_input],
+         'Time_stamp' :  [now]} 
+opt_df = DataFrame(opt)
+df = load_the_spreadsheet('sheet1')
+new_df = df.append(opt_df,ignore_index=True)
+update_the_spreadsheet('sheet1',new_df)   
+
+
 conn = connect(credentials=credentials)        
         
 @st.cache(ttl=600)
@@ -79,52 +114,4 @@ rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
 # Print results.
 for row in rows:
-    st.write(f"{row.name} has a :{row.pet}:")        
-        
-client = Client(scope=scope,creds=credentials)
-spreadsheetname = sheet_url
-spread = Spread(spreadsheetname,client = client)
-
-with columns[1]:
-    st.write(spread.url)
-
-#sh = client.open(spreadsheetname)
-#worksheet_list = sh.worksheets()
-
-#def worksheet_names():
-    #sheet_names = []   
-    #for sheet in worksheet_list:
-        #sheet_names.append(sheet.title)  
-    #return sheet_names
-#def load_the_spreadsheet(spreadsheetname):
-    #worksheet = sh.worksheet(spreadsheetname)
-    #df = DataFrame(worksheet.get_all_records())
-    #return df
-
-#def update_the_spreadsheet(spreadsheetname,dataframe):
-        #col = ['input','Time_stamp']
-        #spread.df_to_sheet(dataframe[col],sheet = spreadsheetname,index = False)
-
-
-
-#now = datetime.now()
-#opt = {'input':[user_input],
-         #'Time_stamp' :  [now]} 
-#opt_df = DataFrame(opt)
-#df = load_the_spreadsheet('Infood_input')
-#new_df = df.append(opt_df,ignore_index=True)
-#update_the_spreadsheet('Infood_input',new_df)   
-
-
-# Perform SQL query on the Google Sheet.
-# Uses st.cache to only rerun when the query changes or after 10 min.
-#@st.cache(ttl=600)
-#def run_query(query):
-    #rows = conn.execute(query, headers=1)
-    #rows = rows.fetchall()
-    #return rows
-
-#rows = run_query(f'SELECT * FROM "{sheet_url}"')
-# Print results.
-#for row in rows:
-    #st.write(f"{row.name} has a :{row.pet}:")
+    st.write(f"{row.input} has a :{row.Time_stamp}:")   
