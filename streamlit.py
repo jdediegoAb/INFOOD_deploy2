@@ -114,10 +114,10 @@ with columns[1]:
     # Print results.
     df = pd.DataFrame(rows)
     df2 = df[['INPUT']]
-    st.dataframe(df2)
     df3= df2['INPUT'].value_counts()
-    df3.columns = ['INPUT', 'COUNT']
-    st.dataframe(df3)
+    df4=pd.Dataframe(df3)
+    df4.columns=['INPUT','COUNT']
+    st.dataframe(df4)
    
 with columns[1]:
     st.markdown(text, unsafe_allow_html=True)
