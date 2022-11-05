@@ -113,7 +113,7 @@ with columns[1]:
     rows = run_query(query)
     # Print results.
     df = pd.DataFrame(rows)
-    df2 = df[['INPUT']]
+    df2 = df[['INPUT']].groupby(['INPUT']).count()
     st.dataframe(df2)
     df3=df2.groupby(['INPUT']).count()
     st.dataframe(df3)
